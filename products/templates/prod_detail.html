@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+
+{% block title %}
+    Product Detail
+{% endblock title %}
+
+
+{% block header %}
+    {% include "header.html" %}
+{% endblock header %}
+
+{% block banner %}
+    {% include "banner.html" %}
+{% endblock banner %}
+
+{% block content %}
+
+<style>
+    form{
+        width: 70%;
+        margin: left;
+    }
+    .rate{
+        display: flex;
+    }
+    .rate li{
+        display: inline-block;
+        margin-right: 10px;
+        font-size: 23px;
+        text-shadow: 2px 2px 6px grey;
+        
+    }
+    .rate li:hover{
+        color: goldenrod;
+    }
+    input[type='radio']{
+        display: none;
+    }
+
+    .rate li.active,.rate li.secondary-active{
+        color: goldenrod;
+    }
+    .checked{
+        color: goldenrod;
+    }
+    .time p{
+        font-size: 11px;
+        font-weight: bold;
+    }
+    .user{
+        line-height: 5px;
+    }
+    .aver{
+        text-align: center;
+        margin-top: 10px;
+        margin-right: 10px;
+        font-size: 25px;
+        text-shadow: 2px 2px 7px grey;
+    }
+    .ave_main{
+        font-size: 12px;
+        text-shadow: none;
+    }
+</style>
+    <!-- content -->
+    <section class="index_content product_detail">
+        <div class="container whiteback">
+            <div class="row">
+                <div class="mainbar detial col-sm-12 col-md-12 col-lg-12">
+                    <div class="pro_detail">
+                        <div class="container">
+                            <div class="row">
+                                <div class="title_div">
+                                    <hr><h5>PRODUCT DETAIL</h5><hr>
+                                </div>
+                                <div class="prod_img col-lg-6" id="img-container" style="display: block;">
+                                    <img src="{{product.image.url}}" alt="" style="margin-top: 40px; margin-left:25px;">
+                                    
+                                    <div class="aver">
+                                        
+                                        <i class="fa fa-star {% if avg.rate__avg > 0 %} checked {% endif %} " aria-hidden="true"></i>
+                                        <i class="fa fa-star {% if avg.rate__avg > 1 %} checked {% endif %}" aria-hidden="true"></i>
+                                        <i class="fa fa-star {% if avg.rate__avg > 2 %} checked {% endif %}" aria-hidden="true"></i>
+                                        <i class="fa fa-star {% if avg.rate__avg > 3 %} checked {% endif %}" aria-hidden="true"></i>
+                                        <i class="fa fa-star {% if avg.rate__avg > 4 %} checked {% endif %}" aria-hidden="true"></i>
+                                        <p class="ave_main"><span style="font-weight: bold;">Average Rating</span> {{avg.rate__avg}}</p>
+                                    </div>
+                                </div>
+                                <div class="prod_info col-lg-6">
+                                    <h5>{{product.prod_name}}</h5>
+                                    <p>Product ID:</p>
+                                    
+                                    
+                                    <div class="price">
+                                        <p> <span> ${{product.price | floatformat:2 | intcomma}}</span> </p>
+                                        <form action="{% url 'order:addtocart' %}" method="POST">
+                                        {% csrf_token %}
+                                            <p>Quantity: <input type="number" name="quantity"></p>
+                                            <input type="hidden" name="prodid" value="{{product.id}}">
+                                            <button type="submit" style="transform: translateX(-6rem);">Add To Cart</button>
+                                        </form>
+                                    </div>
+                                    <p><span>Availability: </span>{{product.availability}}</p>
+                                    <p> <span>Condition :</span>  {{product.condition}}</p>
+                                    <p> <span>Brand :</span> {{product.brand}}</p>
+                                    <p><span>Configuration:</span></p>
+                                    <p><span>HDD -</span>  {{product.HDD}}, <span>Processor -</span> {{product.processor}}, <span> Memory - </span> {{product.RAM}},  <span> Screen Size -</span>  {{product.screen_size}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 style="margin-top: 50px;">Ratings({{reviews.count}})...</h4>
+                    <hr>
+                    <div>
+                        {% if reviews %}
+                            {% for item in reviews %}
+                        
+                                <div style="display: flex; justify-content:space-between">
+                                    <div class="user" style="display: block;">
+                                        <div>
+                                            <p>{{item.comment}}</p>
+                                        </div>
+                                        <div class="time" style="display: flex;">
+                                            <p><i class="fa fa-user" aria-hidden="true"></i>{{item.user.username}}</p>
+                                            <p><i class="fa fa-clock-o" aria-hidden="true"></i>{{item.created_at}}</p>
+                                        </div>
+                                    </div>
+                        
+                                    <div class="rating">
+                                        <i class="fa fa-star {% if item.rate > 0 %} checked {% endif %} " aria-hidden="true"></i>
+                                        <i class="fa fa-star {% if item.rate > 1 %} checked {% endif %}" aria-hidden="true"></i>
+                                        <i class="fa fa-star {% if item.rate > 2 %} checked {% endif %}" aria-hidden="true"></i>
+                                        <i class="fa fa-star {% if item.rate > 3 %} checked {% endif %}" aria-hidden="true"></i>
+                                        <i class="fa fa-star {% if item.rate > 4 %} checked {% endif %}" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <hr>
+                        
+                            {% endfor %}
+                        {% endif %}
+
+                        <hr>
+                        <div>
+                            <form action="{% url 'review' %}" method="GET">
+                            {% csrf_token %}
+                                <p>Rate This Product</p>
+                                <input type="hidden" name="prodid" value="{{prodid.id}}">
+                                <textarea name="comment" id="" cols="50" rows="5" placeholder="Right Your Review"></textarea>
+                                <ul class="rate">
+                                    <li><label for="star_1"><i class="fa fa-star" aria-hidden="true"></i></label><input type="radio" name="rating" id="star_1" value="1"></li>
+                                    <li><label for="star_2"><i class="fa fa-star" aria-hidden="true"></i></label><input type="radio" name="rating" id="star_2" value="2"></li>
+                                    <li><label for="star_3"><i class="fa fa-star" aria-hidden="true"></i></label><input type="radio" name="rating" id="star_3" value="3"></li>
+                                    <li><label for="star_4"><i class="fa fa-star" aria-hidden="true"></i></label><input type="radio" name="rating" id="star_4" value="4"></li>
+                                    <li><label for="star_5"><i class="fa fa-star" aria-hidden="true"></i></label><input type="radio" name="rating" id="star_5" value="5"></li>
+                                </ul>
+                                
+                                {% if user.is_authenticated %}
+                                    <button type="submit" style="transform: translateX(19rem) translateY(-3rem); ">Rate</button>
+                                {% else %}
+                                    <p>You have to be logged in to rate the product. <a href="{% url 'login' %}">login</a> or <a href="{% url 'login' %}">signup</a>  </p>
+                                {% endif %}
+                                    
+                            </form>
+                        </div>
+                        
+
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        $("li").on("click", function(){
+            $("li").removeClass("active");
+            $("li").removeClass("secondary-active");
+            $(this).addClass("active");
+            $(this).prevAll().addClass("secondary-active");
+        })
+    </script>
+    
+    
+{% endblock content %}
+
+
+{% block footer %}
+    {% include "footer.html" %}
+{% endblock footer %}
+
+
+

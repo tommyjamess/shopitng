@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block title %}
+    Brands
+{% endblock title %}
+
+{% block header %}
+    {% include "header.html" %}
+{% endblock header %}
+
+{% block content %}
+{% load humanize %}
+<section class="index_content product">
+    <div class="container whiteback">
+        <div class="row">
+            <div class="mainbar col-sm-12 col-md-7 col-lg-12">
+                <div class="container featured_item">
+                    <div class="title_div">
+                        <hr><h5>Product by Brand</h5><hr>
+                    </div>
+                    <div class="row">
+                        
+                        
+                        {% if brand %}
+                            {% for item in brand %}
+                                <div class="card prod" style="width: 15.5rem;">
+                                    <img src="{{item.image.url}}" class="card-img-top" alt="..." style="height: 10rem; margin-top:45px;">
+                                    <div class="card-body center_text">
+                                        <h4>#{{item.price | floatformat:2 | intcomma}}</h4>
+                                        <p>{{item.prod_name}}</p>
+                                        <a href="#" class="btn btn-sm">Add To Cart</a>
+                                    </div>
+                                    <div class="card card_hover" style="width: 15.5rem;">
+                                        <div class="card-body center_text">
+                                            <h4>#{{item.price | floatformat:2 | intcomma}}</h4>
+                                            <p>{{item.prod_name}}</p>
+                                            <a href="#" class="btn btn-sm">Add To Cart</a>
+                                        </div>
+                                    </div>
+                                    <div class="wish">
+                                        <a href="{% url 'prod_detail' item.id  %}"><i class="fa fa-plus-square" aria-hidden="true"></i>See Product Detail</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                            
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+
+{% block footer %}
+    {% include "footer.html" %}
+{% endblock footer %}

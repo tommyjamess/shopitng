@@ -1,0 +1,111 @@
+<!-- content -->
+{% load humanize %}
+<section class="index_content">
+    <div class="container whiteback">
+        <div class="row">
+            <div class="mainbar col-sm-12 col-md-10 col-lg-12">
+                <div class="container featured_item">
+                    <div class="title_div">
+                        <hr><h5>FEATURED ITEM</h5><hr>
+                    </div>
+                    <div class="row" style=" padding-inline:80px;">
+                        <style>
+                            .checked{
+                                color: goldenrod;
+                            }
+                        </style>
+                        
+                        {% if featured %}
+                            {% for item in featured %}
+                                <div class="card prod" style="width: 15.5rem;">
+                                    <img src="{{item.image.url}}" class="card-img-top" alt="..." style="height: 10rem; margin-top:45px;">
+                                    <div class="card-body center_text">
+                                        <h4>#{{item.price | floatformat:2 | intcomma}}</h4>
+                                        <p>{{item.prod_name}}</p>
+                                        
+                                        <div>
+                                            {{avg.rate__agv}}
+                                            <i class="fa fa-star  checked  " aria-hidden="true"></i>
+                                            <i class="fa fa-star  checked " aria-hidden="true"></i>
+                                            <i class="fa fa-star  checked " aria-hidden="true"></i>
+                                            <i class="fa fa-star {% if avg.rate__avg > 3 %} checked {% endif %}" aria-hidden="true"></i>
+                                            <i class="fa fa-star {% if avg.rate__avg > 4 %} checked {% endif %}" aria-hidden="true"></i>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="card card_hover" style="width: 15.5rem;">
+                                        <div class="card-body center_text">
+                                            <h4>#{{item.price | floatformat:2 | intcomma}}</h4>
+                                            <p>{{item.prod_name}}</p>
+                                            <div>
+                                                <i class="fa fa-star {% if avg.rate__avg > 0 %} checked {% endif %} " aria-hidden="true"></i>
+                                                <i class="fa fa-star {% if avg.rate__avg > 1 %} checked {% endif %}" aria-hidden="true"></i>
+                                                <i class="fa fa-star {% if avg.rate__avg > 2 %} checked {% endif %}" aria-hidden="true"></i>
+                                                <i class="fa fa-star {% if avg.rate__avg > 3 %} checked {% endif %}" aria-hidden="true"></i>
+                                                <i class="fa fa-star {% if avg.rate__avg > 4 %} checked {% endif %}" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wish">
+                                        <a href="{% url 'prod_detail' item.id %}"><i class="fa fa-plus-square" aria-hidden="true"></i>See Product Detail</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="index_content">
+    <div class="container whiteback">
+        <div class="row">
+            <div class="mainbar  col-sm-12 col-md-12 col-lg-12">
+                <div class="row flexs">
+                    
+                    
+                    {% if reco %}
+                        {% for item in reco %}
+                            <div class="card" style="width: 13rem; height:20.5rem;">
+                                <a href="{% url 'prod_detail' item.id %}"><img src="{{item.image.url}}" class="card-img-top" alt="..." style="margin-top: 35px;"></a>
+                                <div class="card-body center_text">
+                                    <h4>$ {{item.price | floatformat:2 | intcomma}}</h4>
+                                    <p style="font-weight: bold; color:black;">{{item.prod_name}}</p>
+                                    <div>
+                                        {{avg.rate__agv}}
+                                        <i class="fa fa-star  checked  " aria-hidden="true"></i>
+                                        <i class="fa fa-star  checked " aria-hidden="true"></i>
+                                        <i class="fa fa-star  checked " aria-hidden="true"></i>
+                                        <i class="fa fa-star {% if avg.rate__avg > 3 %} checked {% endif %}" aria-hidden="true"></i>
+                                        <i class="fa fa-star {% if avg.rate__avg > 4 %} checked {% endif %}" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    
+                </div>
+
+                <div class="title_div">
+                    <hr><h5>RECOMMENDED ITEMS</h5><hr>
+                </div>
+                <div class="recommended_items">
+                    <div class=" reco owl-carousel owl-theme">
+                        
+                        {% if reco %}
+                            {% for item in reco %}
+                                <div class="item">
+                                    <a href="{% url 'prod_detail' item.id %}"><img src="{{item.image.url}}" alt=""></a>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

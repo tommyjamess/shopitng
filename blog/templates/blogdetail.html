@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Blog Detail
+{% endblock title %}
+
+{% block header %}
+    {% include "header.html" %}
+{% endblock header %}
+
+{% block content %}
+    <!-- content -->
+    <section class="index_content">
+        <div class="container whiteback">
+            <div class="row">
+                <div class="blog col-sm-12 col-md-7 col-lg-9">
+                    <div class="title_div">
+                        <hr><h5>LATEST FROM OUR BLOG</h5><hr>
+                    </div>
+                    <P class="title">{{blog.title}}</P>
+                    <div class="user">
+                        <div class="time">
+                            <p><i class="fa fa-user" aria-hidden="true"></i>User</p>
+                            <p><i class="fa fa-calendar-o" aria-hidden="true"></i>{{blog.date}}</p>
+                            <p><i class="fa fa-clock-o" aria-hidden="true"></i>{{blog.time}}</p>
+                        </div>
+                        <div class="rating">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="blogimg col-sm-12">
+                        <img src="{{blog.image.url}}" alt="">
+                    </div>
+                    <article style="margin-top: 30px;">
+                        {{blog.body | safe}}
+                    </article>
+                    <div class="blog_nav">
+                        <a href="#">Prev</a>
+                        <a href="#">Next</a>
+                    </div>
+                    <div class="share">
+                        <img src="sharepost" alt="share">
+                        <img src="sharepost" alt="share">
+                        <img src="sharepost" alt="share">
+                        <img src="sharepost" alt="share">
+                    </div>
+
+
+                    <p>Responses</p>
+                    
+                    {% for response in responses %}
+                        <div class="response">
+                            <img src="{{setting.default_pic.url}}" alt="">
+                            <div class="use">
+                                <div class="time">
+                                    <p><i class="fa fa-user" aria-hidden="true"></i>{{response.name}}</p>
+                                    <p><i class="fa fa-calendar-o" aria-hidden="true"></i>{{response.date}}</p>
+                                    <p><i class="fa fa-clock-o" aria-hidden="true"></i>{{response.time}}</p>
+                                </div>
+                                <p>
+                                    {{response.resp}}
+                                </p>
+                                <a href="">Reply</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <div class="comment">
+                        <form action="" method="POST" style="display: flex; flex-direction:column">
+                        {% csrf_token %}
+                            
+                            {% if user.id is not None %}
+                                <input type="text" placeholder="Name" name="name" style="max-width: 20rem; margin-bottom:20px;" value="{{request.user.username}}">
+                            {% else %}
+                                <input type="text" placeholder="Name" name="name" style="max-width: 20rem; margin-bottom:20px;">
+                            {% endif %}
+                                
+                            <textarea id="" cols="35" rows="6" name="resp" placeholder="comment"></textarea>
+                            <button type="submit" style="margin-left: 8rem; width:10rem">Post Comment</button>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+
+{% block footer %}
+    {% include "footer.html" %}
+{% endblock footer %}

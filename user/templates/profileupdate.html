@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Profile Update
+{% endblock title %}
+
+{% block header %}
+    {% include "header2.html" %}
+{% endblock header %}
+
+{% block content %}
+
+    <div class="container">
+        <form action="{% url 'profileupdate' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div style="margin-top: 30px; text-align:left;">
+                <p><span style="font-weight: bold; margin-right:30px;">First Name:</span> {{profileform.first_name}}</p>
+                <p><span style="font-weight: bold; margin-right:30px;">Last Name:</span> {{profileform.last_name}}</p>
+                <p><span style="font-weight: bold; margin-right:30px;">Email:</span> {{profileform.email}}</p>
+                <p><span style="font-weight: bold; margin-right:30px;">Phone:</span> {{profileform.phone}}</p>
+                <p><span style="font-weight: bold; margin-right:30px;">Address:</span> {{profileform.address}}</p>
+                <p><span style="font-weight: bold; margin-right:30px;">City:</span> {{profileform.city}}</p>
+                <p><span style="font-weight: bold; margin-right:30px;">State:</span> {{profileform.state}}</p>
+                <p><span style="font-weight: bold; margin-right:30px;">Country:</span> {{profileform.country}}</p>
+                <p><span style="font-weight: bold; margin-right:30px;">Image:</span> {{profileform.image}}</p>
+                <button class="buttons" type="submit">Update Profile</button>
+        </form>
+    </div>
+
+{% endblock content %}
+
+{% block footer %}
+  {% include "footer.html" %}
+{% endblock footer %}

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block title %}
+    ShopCart
+{% endblock title %}
+
+{% block header %}
+    {% include "header.html" %}
+{% endblock header %}
+
+{% block content %}
+    <div class="container cart">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Amount</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% if cart %}
+                    {% for item in cart %}
+                    <tr>
+                        <td><img src="{{item.product.image.url}}" alt=""> <p><span>Product Name:</span>{{item.product.prod_name}}</p><p><span>Product Id:</span> {{item.product.product_id}}</p></td>
+                        <td>${{item.product.price | floatformat:2 | intcomma}}</td>
+                        <td><input type="number" value="{{item.quantity}}"></td>
+                        <td>${{item.amount | floatformat:2 | intcomma}}</td>
+                        <td><a href="{% url 'order:deletefromcart' item.id %}"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <h3>Your cart is empty</h3>
+                {% endif %}
+                    
+            </tbody>
+        </table>
+
+
+        
+        <div class="rec">
+            <div class="deloc col-lg-5">
+                <div class="total">
+                    <p>Cart Subtotal: <span id="cat"># {{subtotal | floatformat:2 | intcomma}}</span> </p>
+                    <p>Vat: <span id="tax"># {{vat | floatformat:2 | intcomma}}</span> </p>
+                    <p>Shipping Cost: <span id="ship">$ {{shipping | floatformat:2 | intcomma}}</span> </p>
+                    <p>Total: <span id="tot">#{{total | floatformat:2 | intcomma}}</span> </p>
+                </div>
+                <a href="{% url 'order:checkout' %}" style="padding-block:10px; font-weight:bold;">Checkout</a>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+
+{% block footer %}
+    {% include "footer.html" %}
+{% endblock footer %}

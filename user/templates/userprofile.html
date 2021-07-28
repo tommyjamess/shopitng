@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    User Profile
+{% endblock title %}
+
+{% block header %}
+    {% include "header2.html" %}
+{% endblock header %}
+
+{% block content %}
+
+    <div class="container" style="margin-top: 5rem; text-align:center;">
+        <div>
+            <img src="{{profile.image.url}}" alt="No user picture" style="border-radius:50%; height:180px; width:140px;  border:1px solid black;">
+            {% if request.user.first_name %}
+                <p style="font-size: 25px;"><strong>{{request.user.first_name}} {{request.user.last_name}} </strong></p>
+            {% else %}
+                <p><strong>{{request.user.username}}</strong></p>
+            {% endif %}
+        </div>
+
+        <div style="margin-top: 30px; text-align:left;">
+            <p><span style="font-weight: bold; margin-right:30px;">First Name:</span> {{profile.first_name}}</p>
+            <p><span style="font-weight: bold; margin-right:30px;">Last Name:</span> {{profile.last_name}}</p>
+            <p><span style="font-weight: bold; margin-right:30px;">Email:</span> {{profile.user.email}}</p>
+            <p><span style="font-weight: bold; margin-right:30px;">Phone:</span> {{profile.phone}}</p>
+            <p><span style="font-weight: bold; margin-right:30px;">Address:</span> {{profile.address}}</p>
+            <p><span style="font-weight: bold; margin-right:30px;">City:</span> {{profile.city}}</p>
+            <p><span style="font-weight: bold; margin-right:30px;">State:</span> {{profile.state}}</p>
+            <p><span style="font-weight: bold; margin-right:30px;">Country:</span> {{profile.country}}</p>
+        </div>
+
+    </div>
+  
+{% endblock content %}
+
+{% block footer %}
+    {% include "footer.html" %}
+{% endblock footer %}

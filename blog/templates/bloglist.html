@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    blog list
+{% endblock title %}
+
+{% block header %}
+    {% include "header.html" %}
+{% endblock header %}
+
+{% block content %}
+    <!-- content -->
+    <section class="index_content">
+        <div class="container whiteback">
+            <div class="row">
+                <!-- <div class="sidebar category col-sm-12 col-md-3 col-lg-3">
+                    <div class="side_title_div ">
+                        <hr><h5>CATEGORY</h5><hr>
+                    </div>
+                    <div class="category_list">
+                        <ul>
+                            <li><a href="">SPORTWEAR</a>
+                                <ul>
+                                    <li><a href="">NIKE</a></li>
+                                    <li><a href="">ADIDAS</a></li>
+                                    <li><a href="">PUMA</a></li>
+                                    <li><a href="">ASICS</a></li>
+                                    <li><a href="">UNDER AMOR</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="">MEN</a>
+                                <ul>
+                                    <li><a href="">NIKE</a></li>
+                                    <li><a href="">ADIDAS</a></li>
+                                    <li><a href="">PUMA</a></li>
+                                    <li><a href="">ASICS</a></li>
+                                    <li><a href="">UNDER AMOR</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="">WOMEN</a>
+                                <ul>
+                                    <li><a href="">NIKE</a></li>
+                                    <li><a href="">ADIDAS</a></li>
+                                    <li><a href="">PUMA</a></li>
+                                    <li><a href="">ASICS</a></li>
+                                    <li><a href="">UNDER AMOR</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="">KIDS</a></li>
+                            <li><a href="">FASHION</a></li>
+                            <li><a href="">HOUSEHOLDS</a></li>
+                            <li><a href="">INTERIOR</a></li>
+                            <li><a href="">CLOTHING</a></li>
+                            <li><a href="">BAGS</a></li>
+                            <li><a href="">SHOES</a></li>
+                        </ul>
+                    </div>
+                    <div class="side_title_div">
+                        <hr><h5>BRANDS</h5><hr>
+                    </div>
+                    <div class="brand_list">
+                        <ul>
+                            <li><a href="">ADIDAS</a></li>
+                            <li><a href="">PUMA</a></li>
+                            <li><a href="">ACNE</a></li>
+                            <li><a href="">NIKE</a></li>
+                            <li><a href="">GUCI</a></li>
+                            <li><a href="">PRADA</a></li>
+                            <li><a href="">UNDER AMOR</a></li>
+                        </ul>
+                    </div>
+                    <div class="side_title_div">
+                        <hr><h5>PRICE RANGE</h5><hr>
+                    </div>
+                    <div class="price_range">
+                        <p>price range</p>
+                    </div>
+                </div> -->
+                
+                
+                <div class="blog col-sm-12 col-md-7 col-lg-9">
+                    <div class="title_div">
+                        <hr><h5>LATEST FROM OUR BLOG</h5><hr>
+                    </div>
+                    {% if list %}
+                        {% for item in list %}
+                            <P class="title" style="margin-top: 30px;">{{item.title}} </P>
+                            <div class="user">
+                                <div class="time">
+                                    <p><i class="fa fa-user" aria-hidden="true"></i>User</p>
+                                    <p><i class="fa fa-calendar-o" aria-hidden="true"></i>{{item.date}}</p>
+                                    <p><i class="fa fa-clock-o" aria-hidden="true"></i>{{item.time}}</p>
+                                </div>
+                                <div class="rating">
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="blogimg col-sm-12">
+                                <img src="{{item.image.url}}" alt="">
+                            </div>
+                            <article style="margin-top: 30px;">
+                                {{item.intro | safe}}
+                            </article>
+                            <a href="{% url 'bdetail' item.id item.slug %}">Read More</a>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                    
+                    
+            </div>
+        </div>
+    </section>
+
+    <section class="index_content">
+        <div class="container whiteback">
+            <div class="row">
+                <div class="sidebar col-sm-12 col-md-3 col-lg-3">
+                    <img src="images/home/shipping.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+
+{% block footer %}
+    {% include "footer.html" %}
+{% endblock footer %}

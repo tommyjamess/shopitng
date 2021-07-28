@@ -1,0 +1,77 @@
+<header class="main_header" id="top">
+    <div class="header_one">
+        <div class="container container--flex">
+            <div class="contact">
+                <p> +2 95 01 88 821</p>
+                <p>info@domain.com</p>    
+            </div>
+            <ul class="social_media_handles">
+                <div><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                <div><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                <div><i class="fa fa-dribbble" aria-hidden="true"></i></div>
+                <div><i class="fa fa-google-plus" aria-hidden="true"></i></div>
+                <div><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+            </ul>
+        </div>
+    </div>
+    <div class="header_two">
+        <div class="container">
+            <div class="row">
+                <div class="header_two--logo col col-sm-4 col-md-3 col-lg-3"><img src="{{setting.logo.url}}" alt=""></div>
+                
+                <div class="header_two--nav-links col-sm-12 col-md-6 col-lg-6 ">
+                    <img src="images/menu.png" alt="" class="menu-icon" onclick="menutoggle()">
+                    <ul id="MenuItems" class="nav justify-content-end" >
+                            
+                    </ul>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+    
+    <div class="header_three">
+       <div class="container">
+           <div class="row">
+                <ul class="nav col-sm-12 col-md-10 col-lg-10">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'index' %}" style="font-weight: bold; font-size:18px;">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profileupdate' %}" id="shop" style="font-weight: bold; font-size:18px;">Update Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'userprofile' %}" style="font-weight: bold; font-size:18px;">Profile</i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="font-weight: bold; font-size:18px;">Change Password</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="font-weight: bold; font-size:18px;">Order History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}" style="font-weight: bold; font-size:18px;">Logout</a>
+                    </li>
+                    <li style="float: right;"><img src="{{profile.image.url}}" alt="" style="height: 40px; width:30px; border-radius: 50%;"></li>
+                    {% if user.id is not None %}
+                            
+                        <li>
+                            
+                            <a href="{% url 'userprofile' %}"> Hi!
+                                
+                                {% if request.user.first_name %}
+                                    <p style="font-size: normal;"><strong>{{request.user.first_name}}</strong></p>
+                                {% else %}
+                                    <p><strong>{{request.user.username}}</strong></p>
+                                {% endif %}
+                                        
+                            </a>
+                        </li>
+                                
+                    {% endif %} 
+                </ul>
+           </div>
+           
+       </div>
+    </div>
+</header>

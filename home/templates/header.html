@@ -1,0 +1,136 @@
+<header class="main_header" id="top">
+    <div class="header_one">
+        <div class="container container--flex">
+            <div class="contact">
+                <p> +2 95 01 88 821</p>
+                <p>info@domain.com</p>    
+            </div>
+            <ul class="social_media_handles">
+                <div><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                <div><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                <div><i class="fa fa-dribbble" aria-hidden="true"></i></div>
+                <div><i class="fa fa-google-plus" aria-hidden="true"></i></div>
+                <div><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+            </ul>
+        </div>
+    </div>
+    <div class="header_two">
+        <div class="container">
+            <div class="row">
+                <div class="header_two--logo col col-sm-4 col-md-3 col-lg-3"><img src="{{setting.logo.url}}" alt=""></div>
+                <!-- <div class="header_two--dropdown col-sm-4 col-md-3 col-lg-3">
+                    <div class="drop">
+                        <select name="" id="">
+                            <option value=""><p id="currency">USA</p></option>
+                            <option value="">Canada</option>
+                            <option value="">UK</option>
+                        </select>
+                    </div>
+                    <div class="drop">
+                        <select name="" id="">
+                            <option value=""><p>Dollar</p></option>
+                            <option value="">Canadian Dollar</option>
+                            <option value="">Pound</option>
+                        </select>
+                    </div>
+                </div> -->
+                
+                <div class="header_two--nav-links col-sm-12 col-md-9 col-lg-9 ">
+                    <img src="images/menu.png" alt="" class="menu-icon" onclick="menutoggle()">
+                    <ul id="MenuItems" class="nav justify-content-end" >
+                        
+                        
+                        
+                        
+                        {% if user.id is not None %}
+                            <li class="">
+                                <a class="nav-link" href="{% url 'logout' %}"><i class="fa fa-user" aria-hidden="true"></i>Logout</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-link" href="#"><i class="fa fa-star" aria-hidden="true"></i>Wishlist</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-link" href="{% url 'order:cart' %}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Cart</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-link" href="#"><i class="fa fa-user" aria-hidden="true"></i>Account</a>
+                            </li>
+                            
+                            
+                            
+                            {% else %}
+                            <li class="">
+                                <a class="nav-link" href="{% url 'signupform' %}"><i class="fa fa-crosshairs" aria-hidden="true"></i>Sign Up</a>
+                            </li>
+                            <li class="">
+                                <a class="nav-link" href="{% url 'signupform' %}"><i class="fa fa-user" aria-hidden="true"></i>Login</a>
+                            </li>
+                        
+                        {% endif %} 
+                            
+                    </ul>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+    <div class="header_three">
+       <div class="container">
+           <div class="row">
+                <ul class="nav col-sm-12 col-md-8 col-lg-8">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'index' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="shop">Categories <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+
+                        <ul class=" dropdown-menu">
+                            {% if cat %}
+                                {% for item in cat %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'category' item.id %}">{{item.cat}}</a>
+                                    </li>
+                                {% endfor %}
+                            {% endif %}
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Brands <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+
+                        <ul class="nav dropdown-menu">
+                            {% if brands %}
+                                {% for item in brands %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'brands' item.id %}">{{item.brand}}</a>
+                                    </li>
+                                {% endfor %}
+                            {% endif %}
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'products' %}">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'bcontent' %}">Blog</a>
+                    </li>
+                </ul>
+                <div class="header_three--search col-sm-12 col-md-3 col-lg-3">
+                    
+                    {% if user.is_authenticated %}
+                        <li style="list-style: none; font-size:15px;text-align:right;">
+                            <a href="{% url 'userprofile' %}" style="text-decoration: none;"> 
+                                        {% if request.user.first_name %}
+                                            <p style="font-size: 20px;"><strong>{{request.user.first_name}}</strong></p>
+                                        {% else %}
+                                            <p><strong>{{request.user.username}}</strong></p>
+                                        {% endif %}
+                                        
+                                    </a>
+                        </li>
+                    {% endif %}
+                        
+                </div>
+           </div>
+       </div>
+    </div>
+</header>

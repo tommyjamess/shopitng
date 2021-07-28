@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}
+    SignUp or Login
+{% endblock title %}
+
+
+{% block header %}
+    {% include "header.html" %}
+{% endblock header %}
+
+
+{% block content %}
+            {% if messages %}
+                {% for message in messages %}
+                    {{message}}
+                {% endfor %}
+            {% endif %}
+    <div class="container">
+        <div class="title_div">
+            <hr><h5>LOGIN OR SIGNUP</h5><hr>
+        </div>
+        <div class="login row">
+            <div class="log col-lg-4">
+                <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                    <label for="">Username:</label> <br>
+                    <input type="text" placeholder="Username" name="username"> <br>
+                    <p></p>
+                    <label for="">Password:</label><br>
+                    <input type="password" placeholder="Password" name="password"> <br>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+
+            <div class="col-lg-2">
+            
+            </div>
+
+            
+            <div class="signup col-lg-4">
+                <form action="{% url 'register' %}" method="POST">
+                {% csrf_token %}
+                    <label for="" class="first">First Name:<input type="text" placeholder="Firstname" name="first_name"> <br></label> <br>
+                    <p></p>
+                    <label for="">Last Name:</label><br>
+                    <input type="text" placeholder="Lastname" name="last_name"> <br>
+                    <p></p>
+                    <label for="">Username:</label><br>
+                    <input type="text" placeholder="Username" name="username"> <br>
+                    <p></p>
+                    <label for="">Email:</label><br>
+                    <input type="email" placeholder="example@mail.com" name="email"> <br>
+                    <p></p>
+                    <label for="">Password:</label><br>
+                    <input type="password" placeholder="Enter password" name="password1"> <br>
+                    <p></p>
+                    <label for="">Repeat Password:</label><br>
+                    <input type="password" placeholder="Enter password again" name="password2"> <br>
+                    <button type="submit">Signup</button>
+                </form>
+            </div>
+
+        </div>
+
+        
+
+    </div>
+{% endblock content %}
+
+
+{% block footer %}
+    {% include "footer.html" %}
+{% endblock footer %}

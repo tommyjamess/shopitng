@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %}
+    Checkout Page
+{% endblock title %}
+
+{% block header %}
+    {% include "header2.html" %}
+{% endblock header %}
+
+{% block content %}
+    <div class="back checkout" >
+        <div class="container">
+            <div class="checkouts">
+                <div class="title_div">
+                    <hr><h5>CHECKOUT PAGE</h5><hr>
+                </div>
+                <div class="chek">
+                    <p>Review Your  Shopcart and proceed to order</p>
+                </div>
+                <div class="container cart">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Amount</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if cart %}
+                                {% for item in cart %}
+                                    <tr>
+                                        <td><img src="{{item.product.image.url}}" alt=""> <p><span>Product Name:</span>{{item.product.prod_name}}</p><p><span>Product Id:</span> {{item.product.product_id}}</p></td>
+                                        <td>${{item.product.price | floatformat:2 | intcomma}}</td>
+                                        <td><input type="number" value="{{item.quantity}}" readonly></td>
+                                        <td>${{item.amount | floatformat:2 | intcomma}}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+                    <div class="deloc col-lg-5">
+                        <div class="total">
+                            <p>Cart Subtotal: <span id="cat"># {{subtotal | floatformat:2 | intcomma}}</span> </p>
+                            <p>Vat: <span id="tax"># {{vat | floatformat:2 | intcomma}}</span> </p>
+                            <p>Shipping Cost: <span id="ship">$ {{shipping | floatformat:2 | intcomma}}</span> </p>
+                            <p>Total: <span id="tot">#{{total | floatformat:2 | intcomma}}</span> </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="billto">
+                    <p>Bill To</p>
+                    <form action="{% url 'order:placeorder' %}" method="POST">
+                    {% csrf_token %}
+                        <div class="one">
+                            <!-- <input type="text" placeholder="Company Name" value="Company name" name="company_name"> <br> -->
+                            <input type="text" placeholder="Email" value="{{profile.email}}"> <br>
+                            <!-- <input type="text" placeholder="Title" name="title"> <br> -->
+                            <input type="text" placeholder="First Name" value="{{profile.first_name}}"> <br>
+                            <!-- <input type="text" placeholder="Middle Name" name="middle_name"> <br> -->
+                            <input type="text" placeholder="Last Name" value="{{profile.last_name}}"> <br>
+                        </div>
+                        <div class="two">
+                            <input type="text" placeholder="Address" value="{{profile.address}}"> <br>
+                            <!-- <input type="text" placeholder="Zip/ Postal Code"> <br> -->
+                            <input type="text" placeholder="Country" value="{{profile.country}}"><br>
+                            <input type="text" placeholder="State" value="{{profile.state}}"> <br>
+                            <input type="text" placeholder="City" value="{{profile.city}}"> <br>
+                            <input type="text" placeholder="Mobile Phone" value="{{profile.phone}}" > <br>
+                            <!-- <input type="text" placeholder="Home Phone" name="home_phone"> <br> -->
+                            <input type="hidden" name="amount" value="{{total}}" >
+                            <input type="hidden" name="order_number" value="{{order_code}}" >
+                            <button type="submit">Proceed To Order</button>
+                        </div>
+                        
+        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block footer %}
+    {% include "footer.html" %}
+{% endblock footer %}

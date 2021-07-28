@@ -1,0 +1,109 @@
+{% load static %}
+<section class="footer">
+    <div class="row foot container-fluid">
+        <div class="col-lg-2 log_text">
+            <img src="images/home/logo.png" alt="">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor
+            </p>
+        </div>
+        
+        <div class="video col-lg-2">
+            <video width="140" controls>
+                <source src="{% static '' %}videos/videoplayback (4).mp4" type="video/mp4">
+                your browser does not support the video tag
+            </video>
+        </div>
+        <div class="video col-lg-2">
+            <video width="140" controls>
+                <source src="{% static '' %}videos/videoplayback (4).mp4" type="video/mp4">
+                your browser does not support the video tag
+            </video>
+        </div>
+        <div class="video col-lg-2">
+            <video width="140" controls>
+                <source src="{% static '' %}videos/videoplayback (4).mp4" type="video/mp4">
+                your browser does not support the video tag
+            </video>
+        </div>
+
+        <div class="video col-lg-2">
+            <video width="140" controls>
+                <source src="{% static '' %}videos/videoplayback (4).mp4" type="video/mp4">
+                your browser does not support the video tag
+            </video>
+        </div>
+        
+        <div class=" loc col-lg-2">
+            <img src="images/home/map.png" alt="" style="width: 14rem;">
+            <div class="location" >
+                <p>{{setting.address}}</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer_info fluid-container">
+        
+        <div class="row">
+            <div class="col-2 col-sm-2 col-lg-2">
+                <h5>User</h5>
+                <div>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="">Profile Update</a></li>
+                    <li><a href="">Change Password</a></li>
+                    <li><a href="">ShopCart</a></li>
+                    <li><a href="">Logout</a></li>
+                </div>
+            </div>
+            <div class="cl-2 col-sm-2 col-lg-2">
+                <h5>Quick Shop</h5>
+                <div>
+                    <li><a href="">T-shirt</a></li>
+                    <li><a href="">Men</a></li>
+                    <li><a href="">Women</a></li>
+                    <li><a href="">Gift cards</a></li>
+                    <li><a href="">Shoes</a></li>
+                </div>
+            </div>
+            <div class="col-2 col-sm-2 col-lg-2">
+                <h5>Policies</h5>
+                <div>
+                    <li><a href="">Terms Of Use</a></li>
+                    <li><a href="">Privacy Policy</a></li>
+                    <li><a href="">Refund Policy</a></li>
+                    <li><a href="">Billing Policy</a></li>
+                    <li><a href="">Ticket Policy</a></li>
+                </div>
+            </div>
+            <div class=" col-2 col-sm-2 col-lg-2">
+                <h5>About Store</h5>
+                <div>
+                    <li><a href="">Company Information</a></li>
+                    <li><a href="">Our Engineers</a></li>
+                    <li><a href="">Store Location</a></li>
+                    <li><a href="">Contact us</a></li>
+                    <li><a href="">Copyright</a></li>
+                </div>
+            </div>
+            <div class="col-2 col-sm-2 upda">
+                <h5>Recieve Updates</h5>
+                <div class=" update" >
+                    <form action="{% url 'updateme' %}" method="POST">
+                    {% csrf_token %}
+                        <input type="email" class="form-control" placeholder="Email Address"  style="border: 1px solid black;" name="email">
+                        <button type="submit" >send <i class="fa fa-paper-plane"></i></button>
+                    </form>
+                </div>
+                <p>Get the most recent updates from <br>
+                    our site and be updated your self...</p>
+            </div>
+            
+        </div>
+    </div>
+    <div class="">
+        <div class="copyright">
+            <p>copyright &copy; 2021 Shopper inc. All right reserved.</p>
+            <p> Designed by  Oluwatomisin</p>
+        </div>
+    </div>
+</section>
